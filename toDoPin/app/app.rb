@@ -4,18 +4,29 @@ class ToDoPin < Sinatra::Base
   enable :sessions
 
   get '/' do
-    'Hello ToDoPin!'
     erb :index
   end
 
-  post '/names' do
+  post '/names/new' do
     session[:username] = params[:username]
+    redirect '/names'
+  end
+
+  get '/names' do
+    @username = session[:username]
+    erb :'users/index'
+  end
+
+  post '/tasks/new' do
+    session[:taskTitle] = params[:taskTitle]
+    session[:taskDetail] = params[:taskDetail]
     redirect '/tasks'
   end
 
   get '/tasks' do
-    @username = session[:username]
-    erb :user
+    @task_title = session[:taskTitle]
+    @task_detail = session[:taskDetail]
+    erb :'tasks/index'
   end
 
   # start the server if ruby file executed directly

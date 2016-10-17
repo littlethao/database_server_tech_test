@@ -1,0 +1,9 @@
+<h1>Hello <%= @username %></h1>
+
+<form action="tasks/new" method="post">
+  <label for="task_title">Title of your Task:</label>
+  <input type="text" name="taskTitle"><br>
+  <label for="task_detail">Task content:</label>
+  <input type="text" name="taskDetail"><br>
+  <input type="submit" value="pin my task">
+</form>
