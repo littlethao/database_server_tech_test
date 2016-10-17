@@ -9,12 +9,24 @@ feature 'entering and accessing tasks on to-do list' do
 
   scenario 'adding tasks' do
     visit('/names')
-    fill_in('taskTitle', :with => 'Santa Claus Season')
-    fill_in('taskDetail', :with => 'send out Christmas cards')
+    fill_in('taskTitle', :with => 'Travel')
+    fill_in('taskDetail', :with => 'book flights to Italy')
     click_button('pin my task')
 
     expect(current_path).to eq('/tasks')
-    expect(page).to have_content('Santa Claus Season')
-    expect(page).to have_content('send out Christmas cards')
+    expect(page).to have_content('Travel')
+    expect(page).to have_content('book flights to Italy')
+  end
+
+  scenario 'user can filter task by title' do
+    visit('/names')
+    fill_in('taskTitle', :with => 'Travel')
+    fill_in('taskDetail', :with => 'book flights to Italy')
+    click_button('pin my task')
+
+    visit '/tasks/Travel'
+    expect(page.status_code).to eq(200)
+    expect(page).to have_content('Travel')
+    expect(page).to have_content('book flights to Italy')
   end
 end

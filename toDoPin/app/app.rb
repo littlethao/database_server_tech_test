@@ -29,6 +29,12 @@ class ToDoPin < Sinatra::Base
     erb :'tasks/index'
   end
 
+  get '/tasks/:taskTitle' do
+    @task_title = session[:taskTitle]
+    @task_detail = session[:taskDetail]
+    erb :'tasks/filter'
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
